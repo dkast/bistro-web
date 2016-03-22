@@ -13,7 +13,6 @@ class App extends Component {
     const { children } = this.props;
     return (
       <div>
-        <h1>Bistro dice HOLA!</h1>
         {children}
       </div>
     );

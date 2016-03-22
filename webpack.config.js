@@ -6,7 +6,7 @@ module.exports = {
   devtool: 'inline-source-map',
   entry: [
     'webpack-hot-middleware/client',
-    './src/index'
+    './client/index'
   ],
   output: {
     path: path.join(__dirname, 'dist'),
@@ -24,7 +24,7 @@ module.exports = {
   ],
   module: {
     loaders: [
-      { test: /\.js$/, loaders: ['babel'], include: path.join(__dirname, 'src') },
+      { test: /\.js$/, loaders: ['babel'], exclude: /node_modules/, include: __dirname, },
       { test: /\.less$/, loader: 'style!css!less' },
       { test: /\.(png|jpg)$/, loader: 'url?limit=10000' },
       { test: /\.(woff|woff2)$/, loader: 'url?limit=10000&mimetype=application/font-woff' },
