@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import * as actionCreators from '../actions';
 
-export default class Login extends Component {
+export class Login extends Component {
   constructor(props) {
     super(props);
     const redirectRoute = this.props.location.query.next || '/login';
@@ -11,6 +12,18 @@ export default class Login extends Component {
       password: '',
       redirectTo: redirectRoute
     }
+  }
+
+  handleUsernameChange = (event) => {
+    this.setState({
+      username: event.target.value
+    });
+  }
+
+  handlePasswordChange = (event) => {
+    this.state({
+      password: event.target.value
+    })
   }
 
   login = (e) => {
@@ -45,11 +58,11 @@ export default class Login extends Component {
                          name="password"
                          placeholder="Contraseña"
                          value={this.state.password}
-                         onChange={this.handlepasswordChange}
+                         onChange={this.handlePasswordChange}
                   />
                 </div>
               </div>
-              <div className="ui fluid large blue submit button">Log in</div>
+              <div className="ui fluid large blue submit button" onClick={this.login}>Log in</div>
             </div>
           </div>
         </div>
@@ -57,3 +70,13 @@ export default class Login extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  actions: bindActionCreators(actionCreators, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
