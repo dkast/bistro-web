@@ -1,10 +1,5 @@
 
-@import '../../node_modules/semantic-ui-less/semantic.less';
-
-@type    : 'global';
-@element : 'site';
-
-@import (multiple) '../../node_modules/semantic-ui-less/theme.config';
+@import '../../node_modules/semantic-ui-less/semantic';
 
 /*Local vars*/
 @sidebar : #161616;
@@ -13,6 +8,10 @@
 
 body {
   background-color: @background;
+}
+
+#root {
+  &:extend(.full-height);
 }
 
 // Login

@@ -2,6 +2,32 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actionCreators from '../actions';
+import VelocityTransitionGroup from 'velocity-react/velocity-transition-group';
+import VelocityHelpers from 'velocity-react/velocity-helpers';
+import VelocityComponent from 'velocity-react/velocity-component';
+
+const Animations = {
+  In: VelocityHelpers.registerEffect({
+    calls: [
+      [{
+        opacity: 1,
+        scale: 1
+      }, 1, {
+        easing: [ 150, 15 ]
+      }]
+    ],
+  }),
+  Out: VelocityHelpers.registerEffect({
+    calls: [
+      [{
+        opacity: 0,
+        scale: 0.75
+      }, 1, {
+        easing: 'ease-out'
+      }]
+    ],
+  })
+}
 
 export class Login extends Component {
   constructor(props) {
@@ -10,7 +36,17 @@ export class Login extends Component {
     this.state = {
       username: '',
       password: '',
-      redirectTo: redirectRoute
+      redirectTo: redirectRoute,
+      triggerError: true
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if ((this.props.error) && (this.state.triggerError)) {
+      this.refs.loginBox.runAnimation('stop');
+      this.setState ({
+        triggerError: false
+      });
     }
   }
 
@@ -21,58 +57,76 @@ export class Login extends Component {
   }
 
   handlePasswordChange = (event) => {
-    this.state({
+    this.setState({
       password: event.target.value
     })
   }
 
   login = (e) => {
-    this.props.actions.loginUser(this.sate.username, this.state.password, this.state.redirectTo)
+    this.setState({
+      triggerError: true
+    });
+    this.props.actions.loginUserRequest(this.state.username, this.state.password, this.state.redirectTo)
   }
 
   render() {
+    const error = this.props.error ? 'error' : '';
+
+    const enterAnimation = {
+      animation: Animations.In,
+      duration: 800,
+    };
+
+    const leaveAnimation = {
+      animation: Animations.Out,
+      duration: 200,
+    }
+
     return (
-      <div id="login" className="ui middle aligned center aligned grid">
-        <div className="column">
-          <h2 className="ui blue center aligned icon header">
-            <i className="food icon"></i>
-            Bistro
-          </h2>
-          <div className="ui large form">
-            <div className="ui raised segment">
-              <div className="field">
-                <div className="ui left icon input">
-                  <i className="user icon"></i>
-                  <input type="text"
-                         name="username"
-                         placeholder="Usuario"
-                         value={this.state.username}
-                         onChange={this.handleUsernameChange}
-                  />
+      <VelocityComponent ref="loginBox" animation={'callout.shake'} duration={300}>
+        <div id="login" className="ui middle aligned center aligned grid">
+          <div className="column">
+            <h2 className="ui blue center aligned icon header">
+              <i className="food icon"></i>
+              Bistro
+            </h2>
+            <div className="ui large form">
+              <div className="ui raised segment">
+                <div className={`field ${error}`}>
+                  <div className="ui left icon input">
+                    <i className="user icon"></i>
+                    <input name="user"
+                           placeholder="Usuario"
+                           value={this.state.username}
+                           onChange={this.handleUsernameChange}
+                    />
+                  </div>
                 </div>
-              </div>
-              <div className="field">
-                <div className="ui left icon input">
-                  <i className="lock icon"></i>
-                  <input type="password"
-                         name="password"
-                         placeholder="Contraseña"
-                         value={this.state.password}
-                         onChange={this.handlePasswordChange}
-                  />
+                <div className={`field ${error}`}>
+                  <div className="ui left icon input">
+                    <i className="lock icon"></i>
+                    <input type="password"
+                           name="password"
+                           placeholder="Contraseña"
+                           value={this.state.password}
+                           onChange={this.handlePasswordChange}
+                    />
+                  </div>
                 </div>
+                <div className="ui fluid large blue submit button" onClick={this.login}>Log in</div>
               </div>
-              <div className="ui fluid large blue submit button" onClick={this.login}>Log in</div>
             </div>
           </div>
         </div>
-      </div>
+      </VelocityComponent>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-
+  isAuthenticating: state.auth.isAuthenticating,
+  statusText: state.auth.statusText,
+  error: state.auth.error
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -1,11 +1,10 @@
 var path = require('path');
 var webpack = require('webpack');
-var NpmInstallPlugin = require('npm-install-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  devtool: 'inline-source-map',
+  devtool: 'source-map',
   entry: [
-    'webpack-hot-middleware/client',
     './client/index'
   ],
   output: {
@@ -14,17 +13,23 @@ module.exports = {
     publicPath: '/static/'
   },
   plugins: [
+    new ExtractTextPlugin('style.css'),
     new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
-    new NpmInstallPlugin({
-      save: true
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compressor: {
+        warnings: false
+      }
     })
   ],
   module: {
     loaders: [
-      { test: /\.js$/, loaders: ['babel'], exclude: /node_modules/, include: __dirname, },
-      { test: /\.less$/, loader: 'style!css!less' },
+      { test: /\.js$/, loaders: ['babel'], include: path.join(__dirname, 'client') },
+      { test: /\.less$/, loader: ExtractTextPlugin.extract('style', 'css!less', {publicPath: '../'}) },
       { test: /\.(png|jpg)$/, loader: 'url?limit=10000' },
       { test: /\.(woff|woff2)$/, loader: 'url?limit=10000&mimetype=application/font-woff' },
       { test: /\.ttf$/, loader: 'url?limit=10000&mimetype=application/octet-stream' },

@@ -1,5 +1,5 @@
 import { isCancelError } from 'redux-saga';
-import { take, call, put, fork } from 'redux-saga/effects';
+import { take, call, put, fork, cancel } from 'redux-saga/effects';
 import * as actions from '../actions';
 import * as api from '../middleware/api';
 
@@ -10,6 +10,7 @@ function* authorize(username, password) {
     return token;
   } catch (error) {
     if (!isCancelError(error)) {
+      console.log(error);
       yield put(actions.loginUserFail(error));
     }
   }
@@ -23,7 +24,7 @@ function* loginFlow() {
     // can take more than one action
     yield take([actions.LOGOUT_USER, actions.LOGIN_USER_FAILURE]);
     // cancel task if running
-    yield cancel(task);
+    //yield cancel(task);
   }
 }
 

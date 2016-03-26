@@ -15,7 +15,8 @@ export function loginUserSuccess(token) {
 export function loginUserFail(error) {
   sessionStorage.removeItem('token');
   return {
-    type: LOGIN_USER_FAILURE
+    type: LOGIN_USER_FAILURE,
+    error
   }
 }
 

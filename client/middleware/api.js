@@ -15,8 +15,10 @@ const API_ROOT = 'http://localhost:3000/api/';
 export function loginUser(username, password) {
   return fetch(API_ROOT + 'authenticate', {
     method: 'POST',
+    // credentials: 'include',
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify({
       user: username,
@@ -29,7 +31,6 @@ export function loginUser(username, password) {
     if (!response.ok) {
       return Promise.reject(json);
     }
-
-    return response.token;
+    return json.token;
   })
 }

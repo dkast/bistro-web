@@ -8,6 +8,7 @@ export default () => {
   const api = Router();
 
   api.post('/authenticate', (req, res) => {
+    console.info(req.body);
     const user = req.body.user;
 
     models.Users.findOne({
@@ -17,7 +18,9 @@ export default () => {
       if (bcrypt.compareSync(req.body.password, user.password)) {
         // Payload is included in json token
         const payload = {
-          user: user.username
+          username: user.username,
+          fullname: user.name,
+          isAdmin: user.isAdmin
         };
         const token = jwt.sign(payload, config.secret, { //secret var to jsonwebtoken
           expiresIn: '24h' // expires in 24 hours

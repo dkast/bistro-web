@@ -1,12 +1,9 @@
 import { routerReducer as routing } from 'react-router-redux';
 import { combineReducers } from 'redux';
-
-const user = (state ={},
-  action) => {
-  return state;
-}
+import auth from './auth';
 
 const rootReducer = combineReducers({
+  auth,
   routing
 });
 

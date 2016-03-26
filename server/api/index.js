@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import authentication from '../middleware/auth';
+import utils from '../middleware/utils';
 import users from './users';
 
 export default () => {
@@ -12,6 +13,9 @@ export default () => {
           version: '1.0'
         });
   });
+
+  // Utils and configuration, need security
+  api.use(utils());
 
   // Below this point, authentication is required
   // api middleware to verify a token

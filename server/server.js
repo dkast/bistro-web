@@ -24,7 +24,7 @@ app.use(webpackDevMiddleware(compiler, {
 app.use(webpackHotMiddleware(compiler));
 
 // Use body parser so we can get info from POST and/or URL parameters
-app.use(bodyParser.urlencoded({ extended: false}));
+app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
 
 // API router
@@ -43,10 +43,11 @@ function renderFullPage() {
       <head>
         <title>Bistro</title>
           <meta name="description" content="React app"/>
-      		<meta charset="utf-8">
-      		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+          <meta charset="utf-8">
+          <meta http-equiv="X-UA-Compatible" content="IE=edge">
           <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-      		<script src="//oss.maxcdn.com/semantic-ui/2.1.8/semantic.min.js"></script>
+          <script src="//oss.maxcdn.com/semantic-ui/2.1.8/semantic.min.js"></script>
+          <style media="screen" src="/dist/style.css"></style>
       </head>
       <body>
         <div id="root">
