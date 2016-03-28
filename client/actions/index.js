@@ -20,11 +20,12 @@ export function loginUserFail(error) {
   }
 }
 
-export function loginUserRequest(username, password) {
+export function loginUserRequest(username, password, redirectTo) {
   return {
     type: LOGIN_USER_REQUEST,
     username,
-    password
+    password,
+    redirectTo
   }
 }
 

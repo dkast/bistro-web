@@ -31,7 +31,7 @@ app.use(bodyParser.json());
 app.use('/api', api());
 
 // Client Application
-app.get('/', (req, res) => {
+app.get('*', (req, res) => {
   //res.sendFile(__dirname + '/index.html');
   res.send(renderFullPage());
 });

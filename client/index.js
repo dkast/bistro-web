@@ -11,7 +11,7 @@ import configureStore from './store/configureStore';
 
 import './style/style.less';
 
-const store = configureStore();
+const store = configureStore(browserHistory);
 const history = syncHistoryWithStore(browserHistory, store);
 
 render(

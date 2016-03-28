@@ -4,13 +4,15 @@ import createSagaMiddleware from 'redux-saga';
 import rootReducer from '../reducers';
 import DevTools from '../containers/DevTools';
 import rootSaga from '../sagas';
+import { routerMiddleware } from 'react-router-redux';
 
-export default function configureStore(initialState) {
+export default function configureStore(history, initialState) {
   const store = createStore(
     rootReducer,
     initialState,
     compose(
       applyMiddleware(createSagaMiddleware(rootSaga)),
+      applyMiddleware(routerMiddleware(history)),
       applyMiddleware(createLogger()),
       window.devToolsExtension ? window.devToolsExtension() : DevTools.instrument()
     )
