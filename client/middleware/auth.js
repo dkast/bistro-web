@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect, bindActionCreators } from 'react-redux';
 import { push } from 'react-router-redux';
+import jwtDecode from 'jwt-decode';
 
 export function requireAuthentication(Component) {
   class AuthenticatedComponent extends React.Component {
@@ -43,3 +44,15 @@ export function requireAuthentication(Component) {
 
   return connect(mapStateToProps)(AuthenticatedComponent);
 };
+
+export function getStoredToken() {
+  const token = sessionStorage.getItem('token');
+  if (token) {
+    const exp = jwtDecode(token).exp;
+    const cur = new Date();
+    console.log(exp);
+    console.log(cur.getTime());
+
+    return token;
+  }
+}

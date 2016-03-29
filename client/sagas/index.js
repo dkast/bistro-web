@@ -3,6 +3,7 @@ import { take, call, put, fork, cancel } from 'redux-saga/effects';
 import * as actions from '../actions';
 import * as api from '../middleware/api';
 import { push } from 'react-router-redux';
+import { getStoredToken } from '../middleware/auth';
 
 function* authorize(username, password, redirectTo) {
   try {
@@ -20,10 +21,16 @@ function* authorize(username, password, redirectTo) {
 }
 
 function* loginFlow() {
+  const storedToken = yield  call(getStoredToken);
   while (true) {
-    const { username, password, redirectTo } = yield take(actions.LOGIN_USER_REQUEST);
-    // fork returns a Task object
-    const task = yield fork(authorize, username, password, redirectTo);
+    console.log(storedToken);
+    if (!storedToken) {
+      const { username, password, redirectTo } = yield take(actions.LOGIN_USER_REQUEST);
+      // fork returns a Task object
+      const task = yield fork(authorize, username, password, redirectTo);
+    } else {
+      yield put(actions.loginUserSuccess(storedToken));
+    }
     // can take more than one action
     yield take([actions.LOGOUT_USER, actions.LOGIN_USER_FAILURE]);
     // cancel task if running

@@ -3,7 +3,7 @@ import { Route, IndexRoute } from 'react-router';
 import App from './containers/App';
 import Home from './components/Home';
 import Login from './components/Login';
-import { requireAuthentication } from './middleware/authenticate';
+import { requireAuthentication } from './middleware/auth';
 
 export default (
   <Route path="/" component={App}>
