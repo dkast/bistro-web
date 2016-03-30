@@ -71,6 +71,7 @@ export class Login extends Component {
 
   render() {
     const error = this.props.error ? 'error' : '';
+    const loading = this.props.isAuthenticating ? 'loading' : '';
 
     const enterAnimation = {
       animation: Animations.In,
@@ -87,8 +88,8 @@ export class Login extends Component {
         <div id="login" className="ui middle aligned center aligned grid">
           <div className="column">
             <h2 className="ui blue center aligned icon header">
-              <i className="food icon"></i>
-              Bistro
+              <i className="user icon"></i>
+              {/*Bistro*/}
             </h2>
             <div className="ui large form">
               <div className="ui raised segment">
@@ -113,7 +114,7 @@ export class Login extends Component {
                     />
                   </div>
                 </div>
-                <div className="ui fluid large blue submit button" onClick={this.login}>Log in</div>
+                <div className={`ui fluid large blue ${loading} submit button`} onClick={this.login}>Log in</div>
               </div>
             </div>
           </div>
