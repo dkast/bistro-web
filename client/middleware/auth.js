@@ -49,10 +49,9 @@ export function getStoredToken() {
   const token = sessionStorage.getItem('token');
   if (token) {
     const exp = jwtDecode(token).exp;
-    const cur = new Date();
-    console.log(exp);
-    console.log(cur.getTime());
-
-    return token;
+    const cur = new Date().getTime() / 1000;
+    if (cur < exp) {
+      return token;
+    }
   }
 }

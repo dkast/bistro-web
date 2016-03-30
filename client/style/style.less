@@ -1,10 +1,17 @@
 
 @import '../../node_modules/semantic-ui-less/semantic';
 
+@type    : 'global';
+@element : 'site';
+
+@import (multiple) '../../node_modules/semantic-ui-less/theme.config';
+
 /*Local vars*/
 @sidebar : #161616;
 @background: #F5F7FA;
-@sidebarWidth: 250;
+@sidebarWidth-M: 110;
+@sidebarWidth-L: 200;
+@headerHeight: 55;
 
 body {
   background-color: @background;
@@ -25,4 +32,22 @@ body {
 
 .full-height {
   height: 100%;
+}
+
+// Menu
+.main-content {
+
+  &::before {
+    display: none;
+    content: 'mobile';
+  }
+
+  @media only screen and (min-width: @tabletBreakpoint) {
+    &::before {
+      content: 'desktop';
+      .content-wrapper {
+        margin-left: @sidebarWidth-L;
+      }
+    }
+  }
 }

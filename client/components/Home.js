@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
+import Header from './Header';
+import Sidebar from './Sidebar';
 
 export default class Home extends Component {
   render() {
     return (
-      <strong>Estamos listos!</strong>
+      <div className="main-content">
+        <Header />
+        <Sidebar />
+        <div className="content-wrapper">
+          OK
+        </div>
+      </div>
     );
   }
 }
