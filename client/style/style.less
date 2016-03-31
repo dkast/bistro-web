@@ -11,7 +11,9 @@
 @background: #F5F7FA;
 @sidebarWidth-M: 110;
 @sidebarWidth-L: 200;
-@headerHeight: 55;
+@headerHeight-S: 45;
+@headerHeight-M: 55;
+
 
 body {
   background-color: @background;
@@ -34,7 +36,7 @@ body {
   height: 100%;
 }
 
-// Menu
+// Main
 .main-content {
 
   &::before {
@@ -43,11 +45,44 @@ body {
   }
 
   @media only screen and (min-width: @tabletBreakpoint) {
+    .content-wrapper {
+      margin-left: unit(@sidebarWidth-M, px);
+    }
+
     &::before {
-      content: 'desktop';
-      .content-wrapper {
-        margin-left: @sidebarWidth-L;
-      }
+      display: none;
+      content: 'tablet';
     }
   }
+
+  @media only screen and (min-width: @computerBreakpoint) {
+    .content-wrapper {
+      margin-left: unit(@sidebarWidth-L, px);
+    }
+
+    &::before {
+      display: none;
+      content: 'desktop';
+    }
+  }
+
+}
+
+// Header
+.main-header {
+	position: absolute;
+	z-index: 2;
+	top: 0;
+	left: 0;
+
+	height: @headerHeight-S;
+	width: 100%;
+
+	background: @sidebar;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+
+	@media only screen and (min-width: @tabletBreakpoint) {
+		position: fixed;
+		height: @headerHeight-M;
+	}
 }
