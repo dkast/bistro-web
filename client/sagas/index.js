@@ -30,6 +30,7 @@ function* loginFlow() {
     }
     // can take more than one action
     yield take([actions.LOGOUT_USER, actions.LOGIN_USER_FAILURE]);
+    //const action = yield take('*');
     // cancel task if running
     //yield cancel(task);
   }

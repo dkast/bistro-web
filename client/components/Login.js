@@ -62,7 +62,8 @@ export class Login extends Component {
     })
   }
 
-  login = (e) => {
+  login = (event) => {
+    event.preventDefault();
     this.setState({
       triggerError: true
     });
@@ -114,7 +115,7 @@ export class Login extends Component {
                     />
                   </div>
                 </div>
-                <div className={`ui fluid large blue ${loading} submit button`} onClick={this.login}>Log in</div>
+                <button className={`ui fluid large blue ${loading} submit button`} onClick={this.login}>Log in</button>
               </div>
             </div>
           </div>

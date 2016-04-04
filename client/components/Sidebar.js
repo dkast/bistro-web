@@ -6,9 +6,9 @@ export default class Sidebar extends Component {
       <main className="main-content">
         <nav className="side-nav">
           <ul>
-            <li className="nav-label">Menu</li>
+            <li className="label">Menu</li>
             <li>
-              <a href="#0">Inicio</a>
+              <a href="#0" className="active">Inicio</a>
             </li>
             <li>
               <a href="#0">Articulos</a>

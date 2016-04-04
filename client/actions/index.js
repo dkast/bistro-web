@@ -1,8 +1,11 @@
 
+import { push } from 'react-router-redux';
+
 export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';
 export const LOGIN_USER_FAILURE = 'LOGIN_USER_FAILURE';
 export const LOGIN_USER_REQUEST = 'LOGIN_USER_REQUEST';
 export const LOGOUT_USER = 'LOGOUT_USER';
+export const INIT_LOGOUT = 'INIT_LOGOUT';
 
 export function loginUserSuccess(token) {
   sessionStorage.setItem('token', token);
@@ -26,6 +29,13 @@ export function loginUserRequest(username, password, redirectTo) {
     username,
     password,
     redirectTo
+  }
+}
+
+export function logoutAndRedirect() {
+  return (dispatch, state) => {
+    dispatch(logout());
+    dispatch(push('/'));
   }
 }
 
