@@ -17,7 +17,7 @@ export class Header extends Component {
   }
 
   logout = () => {
-    this.props.actions.logoutAndRedirect();
+    this.props.actions.logout();
   }
 
   componentDidMount() {

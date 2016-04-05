@@ -29,10 +29,14 @@ function* loginFlow() {
       const task = yield fork(authorize, username, password, redirectTo);
     }
     // can take more than one action
-    yield take([actions.LOGOUT_USER, actions.LOGIN_USER_FAILURE]);
-    //const action = yield take('*');
+    const action = yield take([actions.LOGOUT_USER, actions.LOGIN_USER_FAILURE]);
     // cancel task if running
     //yield cancel(task);
+    // TODO: redirect to latest visited page
+    console.log(action);
+    if (action.type === actions.LOGOUT_USER) {
+      yield put(push('/'));
+    }
   }
 }
 
