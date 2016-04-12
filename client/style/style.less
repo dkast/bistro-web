@@ -8,8 +8,9 @@
 @import (multiple) '../../node_modules/semantic-ui-less/theme.config';
 
 /*Local vars*/
-@sidebar : #161616;
-@background: #F5F7FA;
+@sidebar: #161616;
+@graphite: #3e454c;
+@background: #F7F7F7;
 @sidebarWidth-M: 110;
 @sidebarWidth-L: 200;
 @headerHeight-S: 45;
@@ -39,6 +40,10 @@ body {
   .column {
     max-width: 450px;
   }
+}
+
+.graphite {
+  color: @graphite !important;
 }
 
 .full-height {
@@ -92,6 +97,7 @@ body {
 	width: 100%;
 	background: @color-1;
 	box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  padding: 0 20px;
 
 	@media only screen and (min-width: @tabletBreakpoint) {
 		position: fixed;

@@ -1,6 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var NpmInstallPlugin = require('npm-install-webpack-plugin');
+var WebpackNotifier = require('webpack-notifier');
 
 module.exports = {
   devtool: 'inline-source-map',
@@ -17,6 +18,7 @@ module.exports = {
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
+    new WebpackNotifier(),
     new NpmInstallPlugin({
       save: true
     })

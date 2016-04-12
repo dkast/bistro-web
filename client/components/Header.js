@@ -28,46 +28,23 @@ export class Header extends Component {
 
   render() {
     const navIsVisible = this.state.navIsVisible ? 'nav-is-visible' : '';
+    const username = this.props.fullname ? this.props.fullname : this.props.username;
     return (
       <div className="main-header">
-        {/*<a href="#0" className="logo">
-          Logo
-        </a>
-
-        <a href="#0" className={`nav-trigger ${navIsVisible}`} onClick={this.triggerNavigation}>Menu<span></span></a>
-
-        <nav className="nav">
-          <ul className="top-nav">
-            <li>
-              <a href="#0">Pruebas</a>
-            </li>
-            <li className="has-children account">
-              <a href="#0">Cuenta</a>
-              <ul>
-                <li>
-                  <a href="#0">Mi Cuenta</a>
-                </li>
-                <li>
-                  <a href="#0">Salir</a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </nav>*/}
         <div className="ui text inverted menu">
           <div className="header inverted item">
-            Logo
+          Logo
           </div>
           <div className="ui right dropdown item">
-            Cuenta
+            {username}
             <i className="dropdown icon"></i>
             <div className="menu">
               <div className="item">Mi Cuenta</div>
-            <div className="item" onClick={this.logout}>Salir</div>
+              <div className="item" onClick={this.logout}>Salir</div>
             </div>
           </div>
         </div>
-    </div>
+      </div>
     );
   }
 }
@@ -75,7 +52,9 @@ export class Header extends Component {
 const mapStateToProps = (state) => ({
   isAuthenticating: state.auth.isAuthenticating,
   statusText: state.auth.statusText,
-  error: state.auth.error
+  error: state.auth.error,
+  username: state.auth.username,
+  fullname: state.auth.fullname
 });
 
 const mapDispatchToProps = (dispatch) => ({

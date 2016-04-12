@@ -5,6 +5,7 @@ import * as actionCreators from '../actions';
 import VelocityTransitionGroup from 'velocity-react/velocity-transition-group';
 import VelocityHelpers from 'velocity-react/velocity-helpers';
 import VelocityComponent from 'velocity-react/velocity-component';
+import { Logo, UserIcon, LockIcon } from './icons';
 
 const Animations = {
   In: VelocityHelpers.registerEffect({
@@ -88,15 +89,15 @@ export class Login extends Component {
       <VelocityComponent ref="loginBox" animation={'callout.shake'} duration={300}>
         <div id="login" className="ui middle aligned center aligned grid">
           <div className="column">
-            <h2 className="ui blue center aligned icon header">
-              <i className="user icon"></i>
-              {/*Bistro*/}
-            </h2>
             <div className="ui large form">
-              <div className="ui raised segment">
+              <div className="ui segment">
+                <h2 className="ui graphite center aligned icon header">
+                  <Logo width="80px" height="80px" />
+                </h2>
                 <div className={`field ${error}`}>
                   <div className="ui left icon input">
-                    <i className="user icon"></i>
+                    {/*<i className="user icon"></i>*/}
+                    <UserIcon/>
                     <input name="user"
                            placeholder="Usuario"
                            value={this.state.username}
@@ -106,7 +107,8 @@ export class Login extends Component {
                 </div>
                 <div className={`field ${error}`}>
                   <div className="ui left icon input">
-                    <i className="lock icon"></i>
+                    {/*<i className="lock icon"></i>*/}
+                    <LockIcon/>
                     <input type="password"
                            name="password"
                            placeholder="Contraseña"
@@ -115,7 +117,7 @@ export class Login extends Component {
                     />
                   </div>
                 </div>
-                <button className={`ui fluid large blue ${loading} submit button`} onClick={this.login}>Log in</button>
+                <button className={`ui fluid large blue ${loading} submit button`} onClick={this.login}>Iniciar Sesión</button>
               </div>
             </div>
           </div>
