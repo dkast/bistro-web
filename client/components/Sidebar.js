@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BarChartIcon } from './icons';
+import { IndexLink, Link } from 'react-router';
 
 export default class Sidebar extends Component {
   render() {
@@ -9,13 +9,10 @@ export default class Sidebar extends Component {
           <ul>
             <li className="label">Menu</li>
             <li>
-              <a href="#0" className="active">
-                <BarChartIcon/>
-                Inicio
-              </a>
+              <IndexLink to="/" activeClassName="active">Inicio</IndexLink>
             </li>
             <li>
-              <a href="#0">Articulos</a>
+              <Link to="/items" activeClassName="active">Articulos</Link>
             </li>
           </ul>
         </nav>

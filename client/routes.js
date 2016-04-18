@@ -3,6 +3,7 @@ import { Route, IndexRoute } from 'react-router';
 import App from './containers/App';
 import Home from './components/Home';
 import Login from './components/Login';
+import Items from './components/Items/ItemsView';
 import { requireAuthentication } from './middleware/auth';
 
 export default (
@@ -10,5 +11,9 @@ export default (
     <IndexRoute component={requireAuthentication(Home)} />
     <Route path="login" component={Login} />
     <Route path="home" component={requireAuthentication(Home)} />
+
+    <Route component={Home}>
+      <Route path="items" component={Items} />
+    </Route>
   </Route>
 );

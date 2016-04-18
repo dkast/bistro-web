@@ -9,7 +9,7 @@ export default class Home extends Component {
         <Header />
         <Sidebar />
         <div className="content-wrapper">
-          OK
+          {this.props.children}
         </div>
       </div>
     );

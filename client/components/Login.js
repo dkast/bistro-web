@@ -86,43 +86,45 @@ export class Login extends Component {
     }
 
     return (
-      <VelocityComponent ref="loginBox" animation={'callout.shake'} duration={300}>
-        <div id="login" className="ui middle aligned center aligned grid">
-          <div className="column">
-            <div className="ui large form">
-              <div className="ui segment">
-                <h2 className="ui graphite center aligned icon header">
-                  <Logo width="80px" height="80px" />
-                </h2>
-                <div className={`field ${error}`}>
-                  <div className="ui left icon input">
-                    {/*<i className="user icon"></i>*/}
-                    <UserIcon/>
-                    <input name="user"
-                           placeholder="Usuario"
-                           value={this.state.username}
-                           onChange={this.handleUsernameChange}
-                    />
+      <div className="full-height background">
+        <VelocityComponent ref="loginBox" animation={'callout.shake'} duration={300}>
+          <div id="login" className="ui middle aligned center aligned grid">
+            <div className="column">
+              <div className="ui large form">
+                <div className="ui segment">
+                  <h2 className="ui silver center aligned icon header">
+                    <Logo width="60px" height="60px" />
+                  </h2>
+                  <div className={`field ${error}`}>
+                    <div className="ui left icon input">
+                      {/*<i className="user icon"></i>*/}
+                      <UserIcon/>
+                      <input name="user"
+                        placeholder="Usuario"
+                        value={this.state.username}
+                        onChange={this.handleUsernameChange}
+                        />
+                    </div>
                   </div>
-                </div>
-                <div className={`field ${error}`}>
-                  <div className="ui left icon input">
-                    {/*<i className="lock icon"></i>*/}
-                    <LockIcon/>
-                    <input type="password"
-                           name="password"
-                           placeholder="Contraseña"
-                           value={this.state.password}
-                           onChange={this.handlePasswordChange}
-                    />
+                  <div className={`field ${error}`}>
+                    <div className="ui left icon input">
+                      {/*<i className="lock icon"></i>*/}
+                      <LockIcon/>
+                      <input type="password"
+                        name="password"
+                        placeholder="Contraseña"
+                        value={this.state.password}
+                        onChange={this.handlePasswordChange}
+                        />
+                    </div>
                   </div>
+                  <button className={`ui fluid large blue ${loading} submit button`} onClick={this.login}>Iniciar Sesión</button>
                 </div>
-                <button className={`ui fluid large blue ${loading} submit button`} onClick={this.login}>Iniciar Sesión</button>
               </div>
             </div>
           </div>
-        </div>
-      </VelocityComponent>
+        </VelocityComponent>
+      </div>
     );
   }
 }
