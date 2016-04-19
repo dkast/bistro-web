@@ -13,7 +13,7 @@ export default (
     <Route path="home" component={requireAuthentication(Home)} />
 
     <Route component={Home}>
-      <Route path="items" component={Items} />
+      <Route path="items" component={requireAuthentication(Items)} />
     </Route>
   </Route>
 );

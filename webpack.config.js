@@ -18,7 +18,9 @@ module.exports = {
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
-    new WebpackNotifier(),
+    new WebpackNotifier({
+      alwaysNotify: true
+    }),
     new NpmInstallPlugin({
       save: true
     })
