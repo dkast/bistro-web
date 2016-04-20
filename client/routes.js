@@ -4,6 +4,7 @@ import App from './containers/App';
 import Home from './components/Home';
 import Login from './components/Login';
 import Items from './components/Items/ItemsView';
+import ItemDetail from './components/Items/ItemDetailView';
 import { requireAuthentication } from './middleware/auth';
 
 export default (
@@ -13,7 +14,9 @@ export default (
     <Route path="home" component={requireAuthentication(Home)} />
 
     <Route component={Home}>
-      <Route path="items" component={requireAuthentication(Items)} />
+      <Route path="items" component={requireAuthentication(Items)}>
+      </Route>
+      <Route path="items/:id" component={requireAuthentication(ItemDetail)}/>
     </Route>
   </Route>
 );

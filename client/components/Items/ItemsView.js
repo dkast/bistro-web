@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 
 export default class ItemsView extends Component {
+  handleClickNewItem = () => {
+
+  }
+
   render() {
     return (
       <div>
         <div className="ui secondary pointing menu">
           <div className="header item">
-            Articulos
+            Artículos
           </div>
           <div className="right menu">
             <a href="#" className="item">
@@ -36,7 +41,11 @@ export default class ItemsView extends Component {
               </div>
             </div>
             <div className="ui item">
-              <button className="ui primary button">Agregar Articulo</button>
+              <Link
+                to="/items/new"
+                className="ui primary button">
+                Agregar Artículo
+              </Link>
             </div>
           </div>
         </div>
