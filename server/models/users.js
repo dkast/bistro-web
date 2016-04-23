@@ -2,7 +2,7 @@
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Users', {
-    id: {
+    userID: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true,
@@ -36,7 +36,14 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     }
   }, {
-    tableName: 'Users',
-    freezeTableName: true
+    indexes: [
+      {
+        name: 'username_index',
+        method: 'BTREE',
+        fields: ['username']
+      }
+    ]
+  }, {
+    tableName: 'users'
   });
 };
