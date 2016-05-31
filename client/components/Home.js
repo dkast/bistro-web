@@ -6,7 +6,7 @@ export default class Home extends Component {
   render() {
     return (
       <div className="main-content">
-        <Header />
+        <Header location={this.props.location} />
         <Sidebar />
         <div className="content-wrapper">
           {this.props.children}

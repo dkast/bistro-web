@@ -6,17 +6,20 @@ import DevTools from '../containers/DevTools';
 import rootSaga from '../sagas';
 import { routerMiddleware } from 'react-router-redux';
 
+const sagaMiddleware = createSagaMiddleware()
 export default function configureStore(history, initialState) {
   const store = createStore(
     rootReducer,
     initialState,
     compose(
-      applyMiddleware(createSagaMiddleware(rootSaga)),
+      applyMiddleware(sagaMiddleware),
       applyMiddleware(routerMiddleware(history)),
-      applyMiddleware(createLogger()),
+      //applyMiddleware(createLogger()),
       window.devToolsExtension ? window.devToolsExtension() : DevTools.instrument()
     )
-  )
+  );
+
+  sagaMiddleware.run(rootSaga);
 
   if (module.hot) {
     // Enable webpack hot module replacemente for reducers

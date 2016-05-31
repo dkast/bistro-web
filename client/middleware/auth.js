@@ -10,7 +10,7 @@ export function requireAuthentication(Component) {
     }
 
     componentWillReceiveProps(nextProps) {
-      this.checkAuth(this.props.isAuthenticated);
+      this.checkAuth(nextProps.isAuthenticated);
     }
 
     checkAuth = (isAuthenticated) => {

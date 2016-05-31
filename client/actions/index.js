@@ -29,9 +29,10 @@ export function loginUserRequest(username, password, redirectTo) {
   }
 }
 
-export function logout() {
+export function logout(redirectTo) {
   sessionStorage.removeItem('token');
   return {
-    type: LOGOUT_USER
+    type: LOGOUT_USER,
+    redirectTo
   }
 }

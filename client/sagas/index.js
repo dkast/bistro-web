@@ -1,4 +1,3 @@
-import { isCancelError } from 'redux-saga';
 import { take, call, put, fork, cancel } from 'redux-saga/effects';
 import * as actions from '../actions';
 import * as api from '../middleware/api';
@@ -13,10 +12,8 @@ function* authorize(username, password, redirectTo) {
     yield put(push(redirectTo));
     return token;
   } catch (error) {
-    if (!isCancelError(error)) {
-      console.log(error);
+    // isCancelError validation is not longer necesarior in 0.10.0 and up
       yield put(actions.loginUserFail(error));
-    }
   }
 }
 
@@ -35,7 +32,7 @@ function* loginFlow() {
     // TODO: redirect to latest visited page
     console.log(action);
     if (action.type === actions.LOGOUT_USER) {
-      yield put(push('/'));
+      yield put(push(action.redirectTo));
     }
   }
 }
